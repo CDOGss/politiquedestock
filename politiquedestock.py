@@ -128,4 +128,13 @@ if fichier_entree is not None:
         st.subheader("📊 Résultats de l'Audit")
         st.dataframe(df_export, hide_index=True, use_container_width=True)
         
-        csv_export = df_export.to_csv(sep=';', index=False, decimal=',').encode('utf
+        csv_export = df_export.to_csv(sep=';', index=False, decimal=',').encode('utf-8')
+        st.download_button(
+            label="📥 Télécharger le plan d'approvisionnement (CSV)",
+            data=csv_export,
+            file_name='plan_appro_reunion_optimise.csv',
+            mime='text/csv'
+        )
+
+    except Exception as e:
+        st.error(f"Erreur lors du traitement. Détail : {e}")
